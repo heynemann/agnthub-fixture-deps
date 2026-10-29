@@ -1,0 +1,30 @@
+schemaVersion: 1
+agents:
+  reviewer:
+    portable: agents/reviewer/AGENT.md
+    variants:
+      claude:
+        path: .claude/agents/reviewer.md
+      codex:
+        path: .codex/agents/reviewer.toml
+        dependencies:
+          skills:
+            - source: vercel-labs/agent-skills
+              skill: web-design-guidelines
+    dependencies:
+      agents:
+        - agent: planner
+      skills:
+        - source: "anthropics/skills#main"
+          skill: pdf
+          minVersion: "1.0.0"
+          maxVersion: "2.0.0"
+  planner:
+    portable: agents/planner/AGENT.md
+  guarded:
+    portable: agents/guarded/AGENT.md
+  broken:
+    portable: agents/broken/AGENT.md
+    variants:
+      gemini:
+        path: .gemini/agents/broken.md
